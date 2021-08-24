@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import SearchBar from './components/SearchBar';
-import Suggestions from './components/Suggestions';
-import axios from 'axios'
-import Card from 'react-bootstrap/Card'
 
 
 export class App extends Component {
