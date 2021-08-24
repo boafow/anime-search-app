@@ -1,5 +1,4 @@
 import React from 'react'
-import Card from 'react-bootstrap/Card'
 
 const Suggestions = (props) => {
     const options = props.results.map(r => (
