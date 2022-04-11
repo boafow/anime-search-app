@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Suggestions from './Suggestions'
+import Results from './Results'
 
 export class SearchBar extends Component {
     state = {
@@ -45,7 +45,7 @@ export class SearchBar extends Component {
                onChange={this.handleInputChnge}
                style = {searchStyle}
                 />
-                <Suggestions results={this.state.results}/>
+                <Results results={this.state.results}/>
             </form>
         )
     }
