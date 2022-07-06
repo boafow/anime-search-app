@@ -1,59 +1,53 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import Results from './Results'
+import React, { useState } from "react";
+import axios from "axios";
+import Results from "./Results";
 
-export class SearchBar extends Component {
-    state = {
-        query: '',
-        results: [],
-        image_src: '',
-        airing: ''
-    }
+function SearchBar(){
+  const [query, setQuery] = useState("");
+  const [searchBar, setSearchBar] = useState("");
+  const [results, setResults] = useState([]);
+  const [image_src, setImage_src] = useState("");
+  const [airing, setAiring] = useState("");
 
-    getInfo = () => {
-        axios.get(`https://api.jikan.moe/v3/search/anime?q=${this.state.query}`)
-        .then(({ data }) => {
-                this.setState({results: data.results})
-                this.setState({image_src: data.image_url})
-                this.setState({airing: data.airing})
-            })
-    }
+  function getInfo(){
+    axios
+      .get(`https://api.jikan.moe/v3/search/anime?q=${query}`)
+      .then(({ data }) => {
+        setResults(data.results);
+        setImage_src(data.image_url);
+        setAiring(data.airing);
+      });
+  };
 
-    handleInputChnge = () => {
-        this.setState({
-            query: this.searchBar.value
-        }, () => {
-            if (this.state.query && this.state.query.length > 1) {
-                if (this.state.query.length > 3) {
-                    this.getInfo()
-                }
-            } else if (!this.state.query) {
-            }
-        })
-    }
+  function handleInputChange(evt) {
+    setSearchBar(evt.target.value);
+    setQuery(searchBar);
+    if (query && query.length > 1) {
+        if (query.length > 3) {
+            getInfo();
+        }
+    } else if (!query) {
 
-    onSubmit = () => {
-        //bring up page with all results
     }
+  };
 
-    render() {
-        return (
-            <form /*onSubmit={this.onSubmit}*/>
-               <input
-               placeholder = 'Enter an anime or manga'
-               ref = {input => this.searchBar = input}
-               onChange={this.handleInputChnge}
-               style = {searchStyle}
-                />
-                <Results results={this.state.results}/>
-            </form>
-        )
-    }
-}
+
+  return (
+    <form /*onSubmit={this.onSubmit}*/>
+      <input
+        placeholder="Enter an anime or manga"
+        // ref={(input) => (searchBar = input)}
+        onChange={e => handleInputChange(e)}
+        style={searchStyle}
+      />
+      <Results results={results} />
+    </form>
+  );
+};
 
 // Proptypes
 const searchStyle = {
-    width: '100%'
-}
+  width: "100%",
+};
 
-export default SearchBar
+export default SearchBar;
