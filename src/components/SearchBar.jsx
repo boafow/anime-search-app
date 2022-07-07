@@ -2,42 +2,33 @@ import React, { useState } from "react";
 import axios from "axios";
 import Results from "./Results";
 
-function SearchBar(){
+export const SearchBar = () => {
   const [query, setQuery] = useState("");
-  const [searchBar, setSearchBar] = useState("");
+  //   const [searchBar, setSearchBar] = useState("");
   const [results, setResults] = useState([]);
-  const [image_src, setImage_src] = useState("");
-  const [airing, setAiring] = useState("");
 
-  function getInfo(){
+  const getInfo = () => {
     axios
-      .get(`https://api.jikan.moe/v3/search/anime?q=${query}`)
+      .get(`https://api.jikan.moe/v4/anime?q=${query}&sfw=true`)
       .then(({ data }) => {
-        setResults(data.results);
-        setImage_src(data.image_url);
-        setAiring(data.airing);
+        setResults(data.data);
       });
   };
 
-  function handleInputChange(evt) {
-    setSearchBar(evt.target.value);
-    setQuery(searchBar);
-    if (query && query.length > 1) {
-        if (query.length > 3) {
-            getInfo();
-        }
+  async function handleInputChange(evt) {
+    // setSearchBar();
+    setQuery(evt.target.value);
+    if (query.length > 1) {
+      await getInfo();
     } else if (!query) {
-
     }
-  };
-
+  }
 
   return (
-    <form /*onSubmit={this.onSubmit}*/>
+    <form>
       <input
         placeholder="Enter an anime or manga"
-        // ref={(input) => (searchBar = input)}
-        onChange={e => handleInputChange(e)}
+        onChange={(e) => handleInputChange(e)}
         style={searchStyle}
       />
       <Results results={results} />

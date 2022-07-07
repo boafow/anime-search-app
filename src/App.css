@@ -5,3 +5,28 @@
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
 }
+
+.cardStyle {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    width: 60%;
+    float: left;
+    margin: auto;
+    text-align: center;
+}
+
+.cards {
+  display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: 1rem;
+}
+
+.imgStyle {
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    padding: 5px;
+}
