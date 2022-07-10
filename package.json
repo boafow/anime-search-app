@@ -37,5 +37,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://boafow.github.io/anime-search-app"
+  "homepage": "https://boafow.github.io/anime-search-app",
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  }
 }
